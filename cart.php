@@ -53,7 +53,17 @@ $i = 1;
  										 echo "<a href=\"remove_cart.php?remove=all\" class=\"btn btn-warning right pull-right\">Clear Cart</a><br><br>";
 										echo "<div><h3> <strong>Total Price : </strong>". $total."</h3>";
                                         echo "<br></div>";
-                        if($_SERVER["REQUEST_METHOD"] == "POST"){ 
+                        if($_SERVER["REQUEST_METHOD"] == "POST")
+						{
+							if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
+  							header("location: login.php");
+								exit;
+								}
+							else
+						
+						
+						{ 
+							
 							 $input_transaction = trim($_POST["transaction_id"]);
     					if(empty($input_transaction)){
         				$transaction_err = "Please enter the Tramsaction ID.";     
@@ -79,7 +89,7 @@ $i = 1;
 					} 					
 					else{
     						echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
-						}}}
+						}}}}
                     // Close connection
 					?>  <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                         <div class="form-group <?php echo (!empty($transaction_err)) ? 'has-error' : ''; ?>">

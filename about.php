@@ -29,7 +29,7 @@ margin: auto;
 		<div class="col-sm-1"></div>
 		<div class="col-sm-2">
 <div class="card">
-  <img src="image/people.png" alt="John" style="width:80%">
+  <img src="https://avatars3.githubusercontent.com/u/26713923?s=400&u=8bce5e5fd0ffc772d7ad524c2e099c7de5d61a35&v=4" alt="John" style="width:80%">
   <h2>Rekhansh</h2>
   <p class="title">Mechnical Engineering</p>
   <p>IIT(ISM), Dhanbad</p>
