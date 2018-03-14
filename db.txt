@@ -1,0 +1,5 @@
+CREATE DATABASE ordering_db;
+CREATE TABLE item_list (food_id INT(11) AUTO_INCREMENT, name VARCHAR(30) NOT NULL, price INT(30) NOT NULL DEFAULT '0', detail TEXT,  PRIMARY KEY (food_id));
+CREATE TABLE orders (order_id INT(11) AUTO_INCREMENT, username VARCHAR(30) NOT NULL, price INT(11) DEFAULT '0', status VARCHAR(50) DEFAULT 'Processing', transaction_id INT(11), PRIMARY KEY (order_id));
+CREATE TABLE orders_all(order_id INT(11), food_id INT(11));
+CREATE TABLE users (id INT(11) AUTO_INCREMENT, username VARCHAR(30) NOT NULL, password VARCHAR(255) NOT NULL, created_at DATETIME, PRIMARY KEY (id));

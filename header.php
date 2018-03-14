@@ -1,5 +1,6 @@
 <?php session_start();?>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <nav class="navbar navbar-inverse" style="margin-bottom: 0;border-radius: 0;">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -30,7 +31,7 @@
         <a class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\" href=\"#\"><b>".htmlspecialchars($_SESSION['username'])."</b>
         <span class=\"caret\"></span></a>
         <ul class=\"dropdown-menu\">
-          <li><a href=\"#\">Order History</a></li>
+          <li><a href=\"orders.php\">Order History</a></li>
 			<li><a href=\"logout.php\">Log out</a></li>
         </ul>
       </li>

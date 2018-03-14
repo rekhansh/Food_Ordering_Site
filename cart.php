@@ -18,8 +18,10 @@ $i = 1;
 					
                     // Include config file
                     require_once 'config.php';
+					$transaction ="";
+					$transaction_err ="";
                     // Attempt select query execution
-					echo "<div class=\"container\">";
+					echo "<div id=\"cart\" class=\"container\">";
  					echo "<br><table class='table table-bordered table-striped'>";
                                 echo "<thead>";
                                     echo "<tr>";
@@ -50,11 +52,49 @@ $i = 1;
                      echo "</table>";
  										 echo "<a href=\"remove_cart.php?remove=all\" class=\"btn btn-warning right pull-right\">Clear Cart</a><br><br>";
 										echo "<div><h3> <strong>Total Price : </strong>". $total."</h3>";
-                                        echo "<br><br><a href=\"#\" class=\"btn btn-info \">Checkout</a></div>";
-                                   
-						echo "</div>";
+                                        echo "<br></div>";
+                        if($_SERVER["REQUEST_METHOD"] == "POST"){ 
+							 $input_transaction = trim($_POST["transaction_id"]);
+    					if(empty($input_transaction)){
+        				$transaction_err = "Please enter the Tramsaction ID.";     
+    					} elseif(!ctype_digit($input_transaction)){
+        				$transaction_err = 'Please enter a positive integer value.';
+    					} else{
+        				$transaction = $input_transaction;
+    				}
+						if(empty($transaction_err)){
+						// Prepare an update statement
+						$sql = "INSERT INTO orders (username, price, transaction_id) VALUES ('".$_SESSION['username']."', '$total', '$transaction')";
+        
+							if(mysqli_query($link, $sql)){
+    					// Obtain last inserted id
+							$order_id = mysqli_insert_id($link);
+								foreach($cartitems as $key=>$id)
+					{
+						$sql = "INSERT INTO orders_all(order_id,food_id) VALUES ($order_id, $id)";
+									mysqli_query($link, $sql);
+					}	
+    						echo "Order Placed successfully. Order ID is: " . $order_id;
+							header("location: welcome.php");
+					} 					
+					else{
+    						echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+						}}}
                     // Close connection
+					?>  <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                        <div class="form-group <?php echo (!empty($transaction_err)) ? 'has-error' : ''; ?>">
+                            <label>Transaction Id</label>
+                            <input type="text" name="transaction_id" class="form-control" value="<?php echo $transaction; ?>">
+                            <span class="help-block"><?php echo $transaction_err;?></span>
+                        </div>
+                        <input type="hidden" name="id" value="<?php echo $id; ?>"/>
+                        <input id="checkout" type="submit" class="btn btn-primary" value="Checkout">
+                        <a href="menu.php" class="btn btn-default">Cancel</a>
+                    </form>
+		<?php
+					echo "</div>";
                     mysqli_close($link);
+					
 }
 else
 {
@@ -63,9 +103,10 @@ else
 	echo "<a href=\"menu.php\" class=\"btn btn-info \">Order Now</a></div>";
 }
 ?>
-	
 <script src="js/jquery-1.11.3.min.js"></script>
 <script src="js/bootstrap.js"></script>
+		<script>
+</script>
 	</body>
 </html>
 

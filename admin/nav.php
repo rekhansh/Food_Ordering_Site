@@ -24,7 +24,7 @@
     <div class="collapse navbar-collapse" id="inverseNavbar1">
       <ul class="nav navbar-nav">
         <li class="active"><a href="index.php">Items<span class="sr-only">(current)</span></a></li>
-        <li><a href="#">Order</a></li>
+        <li><a href="orders.php">Order</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#">Admin</a></li>
